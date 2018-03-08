@@ -1,8 +1,12 @@
 ﻿using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Neo.UniversalWallet.Data;
 using Neo.UniversalWallet.ViewModels.Helpers.Messages;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Neo.UniversalWallet.ViewModels
 {
@@ -29,6 +33,8 @@ namespace Neo.UniversalWallet.ViewModels
         #region Private Methods 
         private void HandleUnlockWallet()
         {
+            var wallet = JsonConvert.DeserializeObject<WalletDto>(File.ReadAllText(@"PrivateNetWallet.json"));
+
             MessengerInstance.Send(new NavigationMessage("DashboardView"));
         }
         #endregion
