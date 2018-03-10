@@ -6,12 +6,15 @@ using GalaSoft.MvvmLight.Command;
 using Neo.UniversalWallet.Data;
 using Neo.UniversalWallet.ViewModels.Helpers.Messages;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Neo.UniversalWallet.ViewModels
 {
     public class LoadWalletViewModel : ViewModelBase
     {
+        #region Private Fields 
+        private readonly IApplicationContext _applicationContext;
+        #endregion
+
         #region Public Properties 
         public ObservableCollection<string> Networks { get; private set; }
 
@@ -21,8 +24,10 @@ namespace Neo.UniversalWallet.ViewModels
         #endregion
 
         #region Constructor
-        public LoadWalletViewModel()
+        public LoadWalletViewModel(IApplicationContext applicationContext)
         {
+            this._applicationContext = applicationContext;
+
             this.Networks = new ObservableCollection<string> { "Mainnet", "Testnet", "CoZ Testnet", "Privatenet" };
             this.SelectedNetwork = this.Networks.First();
 
@@ -34,6 +39,7 @@ namespace Neo.UniversalWallet.ViewModels
         private void HandleUnlockWallet()
         {
             var wallet = JsonConvert.DeserializeObject<WalletDto>(File.ReadAllText(@"PrivateNetWallet.json"));
+            this._applicationContext.Wallet = wallet;
 
             MessengerInstance.Send(new NavigationMessage("DashboardView"));
         }

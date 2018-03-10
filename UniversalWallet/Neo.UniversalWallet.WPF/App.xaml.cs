@@ -1,4 +1,6 @@
 ﻿using Autofac;
+using Neo.UniversalWallet.Data;
+using Neo.UniversalWallet.Model;
 using Neo.UniversalWallet.ViewModels;
 using Neo.UniversalWallet.WPF.MarkupExtensions;
 
@@ -22,8 +24,10 @@ namespace Neo.UniversalWallet.WPF
         {
             var autoFacContainerBuilder = new ContainerBuilder();
 
+            autoFacContainerBuilder.RegisterModule<DataRegistrationModule>();
             autoFacContainerBuilder.RegisterModule<ViewsRegistrationModule>();
             autoFacContainerBuilder.RegisterModule<ViewModelsRegistrationModule>();
+            autoFacContainerBuilder.RegisterModule<ModelsRegistrationModule>();
 
             var container = autoFacContainerBuilder.Build();
             var lifetimeScope = container.BeginLifetimeScope();

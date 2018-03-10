@@ -6,12 +6,13 @@
 
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.6.2" />
-    <PackageReference Include="MvvmLightLibs" Version="5.4.1" />
+    <PackageReference Include="MvvmLightLibsStd10" Version="5.4.1" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Neo.UniversalWallet.Data\Neo.UniversalWallet.Data.csproj" />
+    <ProjectReference Include="..\Neo.UniversalWallet.Model\Neo.UniversalWallet.Model.csproj" />
     <ProjectReference Include="..\Neo.UniversalWallet.ViewModels.Helpers\Neo.UniversalWallet.ViewModels.Helpers.csproj" />
   </ItemGroup>
 
