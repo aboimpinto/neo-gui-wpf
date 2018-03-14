@@ -18,6 +18,7 @@
     <ProjectReference Include="..\Core\Neo.UI.Core.Theming\Neo.UI.Core.Theming.csproj" />
     <ProjectReference Include="..\Core\Neo.UI.Core.Wallet\Neo.UI.Core.Wallet.csproj" />
     <ProjectReference Include="..\Neo.Gui.Dialogs\Neo.Gui.Dialogs.csproj" />
+    <ProjectReference Include="..\UniversalWallet\Neo.UniversalWallet.WPF\Neo.UniversalWallet.WPF.csproj" />
   </ItemGroup>
 
 </Project>

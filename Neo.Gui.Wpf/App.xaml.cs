@@ -11,13 +11,14 @@ using Autofac;
 using Neo.Gui.Dialogs.Interfaces;
 using Neo.Gui.Dialogs.LoadParameters.Home;
 using Neo.Gui.Dialogs.LoadParameters.Updater;
-
+using Neo.Gui.ViewModels;
 using Neo.Gui.Wpf.Controls;
 using Neo.Gui.Wpf.Extensions;
 using Neo.Gui.Wpf.MarkupExtensions;
 using Neo.Gui.Wpf.Native;
 using Neo.Gui.Wpf.Native.Services;
 using Neo.Gui.Wpf.Properties;
+using Neo.Gui.Wpf.Screens;
 using Neo.Gui.Wpf.Views;
 
 using Neo.UI.Core.Globalization.Resources;
@@ -46,8 +47,8 @@ namespace Neo.Gui.Wpf
         protected override void OnExit(ExitEventArgs e)
         {
             // Dispose of controller instances
-            this.walletController.Dispose();
-            this.walletController = null;
+            //this.walletController.Dispose();
+            //this.walletController = null;
 
             base.OnExit(e);
         }
@@ -57,84 +58,93 @@ namespace Neo.Gui.Wpf
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
             var containerLifetimeScope = BuildContainer();
-
-            Debug.Assert(containerLifetimeScope != null);
-
-            // Set static lifetime scopes
-            DialogManager.SetLifetimeScope(containerLifetimeScope);
             DataContextBindingExtension.SetLifetimeScope(containerLifetimeScope);
 
-            var dialogManager = containerLifetimeScope.Resolve<IDialogManager>() as DialogManager;
-            var dispatchService = containerLifetimeScope.Resolve<IDispatchService>();
-            var themeManager = containerLifetimeScope.Resolve<IThemeManager>();
-            var versionHelper = containerLifetimeScope.Resolve<IVersionService>();
-            this.walletController = containerLifetimeScope.Resolve<IWalletController>();
+            MainViewModel.SetLifetimeScope(containerLifetimeScope);       // This is not injected because I DON'T WANT TO IMPLEMENT THE ServiceLocator Pattern. Only in the class this is need to load the view.
 
-            Debug.Assert(
-                dialogManager != null &&
-                dispatchService != null &&
-                themeManager != null &&
-                versionHelper != null &&
-                this.walletController != null);
 
-            TransactionOutputListBox.SetDialogManager(dialogManager);
+            InstallRootCertificateIfRequired();
 
-            Task.Run(async () =>
-            {
-                InstallRootCertificateIfRequired();
+            this.MainWindow = new MainView();
+            this.MainWindow.Show();
 
-                themeManager.LoadTheme();
+            //Debug.Assert(containerLifetimeScope != null);
 
-                // Show splash screen
-                SplashScreen splashScreen = null;
-                await dispatchService.InvokeOnMainUIThread(() =>
-                {
-                    splashScreen = new SplashScreen();
-                    splashScreen.Show();
-                });
+            //// Set static lifetime scopes
+            //DialogManager.SetLifetimeScope(containerLifetimeScope);
+            //DataContextBindingExtension.SetLifetimeScope(containerLifetimeScope);
 
-                Window window = null;
-                try
-                {
-                    if (versionHelper.UpdateIsRequired)
-                    {
-                        // Display update window
-                        await dispatchService.InvokeOnMainUIThread(() =>
-                        {
-                            window = dialogManager.CreateDialog<UpdateLoadParameters>(null) as Window;
-                        });
-                        return;
-                    }
+            //var dialogManager = containerLifetimeScope.Resolve<IDialogManager>() as DialogManager;
+            //var dispatchService = containerLifetimeScope.Resolve<IDispatchService>();
+            //var themeManager = containerLifetimeScope.Resolve<IThemeManager>();
+            //var versionHelper = containerLifetimeScope.Resolve<IVersionService>();
+            //this.walletController = containerLifetimeScope.Resolve<IWalletController>();
 
-                    // Application is starting normally
+            //Debug.Assert(
+            //    dialogManager != null &&
+            //    dispatchService != null &&
+            //    themeManager != null &&
+            //    versionHelper != null &&
+            //    this.walletController != null);
 
-                    // Initialize wallet controller
-                    this.walletController.Initialize();
-                    this.walletController.SetNEP5WatchScriptHashes(Settings.Default.NEP5Watched.ToArray());
+            //TransactionOutputListBox.SetDialogManager(dialogManager);
 
-                    await dispatchService.InvokeOnMainUIThread(() =>
-                    {
-                        window = dialogManager.CreateDialog<HomeLoadParameters>(null) as Window;
-                    });
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex.Message);
-                }
-                finally
-                {
-                    Debug.Assert(window != null);
+            //Task.Run(async () =>
+            //{
+            //    InstallRootCertificateIfRequired();
 
-                    await dispatchService.InvokeOnMainUIThread(() =>
-                    {
-                        this.MainWindow = window;
-                        this.MainWindow?.Show();
-                        
-                        // Close splash screen
-                        splashScreen.Close();
-                    });
-                }
-            });
+            //    themeManager.LoadTheme();
+
+            //    // Show splash screen
+            //    SplashScreen splashScreen = null;
+            //    await dispatchService.InvokeOnMainUIThread(() =>
+            //    {
+            //        splashScreen = new SplashScreen();
+            //        splashScreen.Show();
+            //    });
+
+            //    Window window = null;
+            //    try
+            //    {
+            //        if (versionHelper.UpdateIsRequired)
+            //        {
+            //            // Display update window
+            //            await dispatchService.InvokeOnMainUIThread(() =>
+            //            {
+            //                window = dialogManager.CreateDialog<UpdateLoadParameters>(null) as Window;
+            //            });
+            //            return;
+            //        }
+
+            //        // Application is starting normally
+
+            //        // Initialize wallet controller
+            //        this.walletController.Initialize();
+            //        this.walletController.SetNEP5WatchScriptHashes(Settings.Default.NEP5Watched.ToArray());
+
+            //        await dispatchService.InvokeOnMainUIThread(() =>
+            //        {
+            //            window = dialogManager.CreateDialog<HomeLoadParameters>(null) as Window;
+            //        });
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        Debug.WriteLine(ex.Message);
+            //    }
+            //    finally
+            //    {
+            //        Debug.Assert(window != null);
+
+            //        await dispatchService.InvokeOnMainUIThread(() =>
+            //        {
+            //            this.MainWindow = window;
+            //            this.MainWindow?.Show();
+
+            //            // Close splash screen
+            //            splashScreen.Close();
+            //        });
+            //    }
+            //});
         }
 
         private static ILifetimeScope BuildContainer()
@@ -144,7 +154,7 @@ namespace Neo.Gui.Wpf
             autoFacContainerBuilder.RegisterModule<WalletRegistrationModule>();
 
             autoFacContainerBuilder.RegisterModule<NativeServicesRegistrationModule>();
-
+            autoFacContainerBuilder.RegisterModule<ViewsRegistrationModule>();
             autoFacContainerBuilder.RegisterModule<WpfProjectViewModelsRegistrationModule>();
             autoFacContainerBuilder.RegisterModule<ViewModelsRegistrationModule>();
             autoFacContainerBuilder.RegisterModule<DialogsRegistrationModule>();

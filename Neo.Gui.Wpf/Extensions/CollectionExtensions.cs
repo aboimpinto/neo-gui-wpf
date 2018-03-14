@@ -7,7 +7,7 @@ namespace Neo.Gui.Wpf.Extensions
         public static string[] ToArray(this StringCollection collection)
         {
             var array = new string[collection.Count];
-            for (int i = 0; i < collection.Count; i++)
+            for (var i = 0; i < collection.Count; i++)
             {
                 array[i] = collection[i];
             }
