@@ -58,12 +58,13 @@ namespace Neo.Gui.Wpf
         {
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
-            var lightMode = Settings.Default.LightWalletMode;
+            //var lightMode = Settings.Default.LightWallet;
 
-            var containerLifetimeScope = BuildContainer(lightMode);
+            var containerLifetimeScope = BuildContainer(false);
 
             Debug.Assert(containerLifetimeScope != null);
 
+            DataContextBindingExtension.SetLifetimeScope(containerLifetimeScope);
             MainViewModel.SetLifetimeScope(containerLifetimeScope);       // This is not injected because I DON'T WANT TO IMPLEMENT THE ServiceLocator Pattern. Only in the class this is need to load the view.
 
             InstallRootCertificateIfRequired();

@@ -8,7 +8,6 @@ namespace Neo.Gui.ViewModels
         ViewModelBase,
         IMessageHandler<NavigationMessage>
     {
-        private readonly IMessageSubscriber _messageSubscriber;
         private static ILifetimeScope _containerLifetimeScope;
 
         private object _pageContent;
@@ -25,9 +24,7 @@ namespace Neo.Gui.ViewModels
 
         public MainViewModel(IMessageSubscriber messageSubscriber)
         {
-            this._messageSubscriber = messageSubscriber;
-
-            this._messageSubscriber.Subscribe(this);
+            messageSubscriber.Subscribe(this);
             this.PageContent = LoadView("LoadWalletView");
         }
 
@@ -45,6 +42,14 @@ namespace Neo.Gui.ViewModels
         #region IMessageHandler Implementation 
         public void HandleMessage(NavigationMessage message)
         {
+            if (this.PageContent is IView view)
+            {
+                if (view.DataContext is IUnloadable unloadableView)
+                {
+                    unloadableView.OnUnload();
+                }
+            }
+
             this.PageContent = LoadView(message.DestinationPage);
         }
         #endregion

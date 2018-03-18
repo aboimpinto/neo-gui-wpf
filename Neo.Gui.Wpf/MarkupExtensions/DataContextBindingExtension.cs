@@ -39,9 +39,7 @@ namespace Neo.Gui.Wpf.MarkupExtensions
             if (this.ViewModel == null) return null;
 
             var provideValueTarget = serviceProvider.GetService(typeof(IProvideValueTarget)) as IProvideValueTarget;
-            var target = provideValueTarget?.TargetObject as FrameworkElement;
-
-            if (target == null || DesignerProperties.GetIsInDesignMode(target)) return null;
+            if (!(provideValueTarget?.TargetObject is FrameworkElement target) || DesignerProperties.GetIsInDesignMode(target)) return null;
 
             var viewModelInstance = containerLifetimeScope.Resolve(this.ViewModel);
 

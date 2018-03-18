@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight.Command;
 using Neo.UI.Core.Messaging.Interfaces;
 using Neo.UI.Core.Services.Interfaces;
 using Neo.UI.Core.Wallet;
+using Neo.UI.Core.Wallet.Initialization;
 using Neo.UI.Core.Wallet.Messages;
 
 namespace Neo.Gui.ViewModels
@@ -10,6 +11,7 @@ namespace Neo.Gui.ViewModels
     public class LoadWalletViewModel : 
         ViewModelBase, 
         ILoadable,
+        IUnloadable,
         IMessageHandler<WalletStatusMessage>
     {
         #region Private Fields 
@@ -99,7 +101,7 @@ namespace Neo.Gui.ViewModels
         #region IMessageHandler Implementation 
         public void HandleMessage(WalletStatusMessage message)
         {
-            this.ConnectionStatus = "Connected to NEO Private Network Node";
+            this.ConnectionStatus = "Connected to NEO Network";
 
             if (this._walletController.WalletIsOpen)
             {
@@ -108,11 +110,19 @@ namespace Neo.Gui.ViewModels
         }
         #endregion
 
+        #region IUnloadable Implementation 
+        public void OnUnload()
+        {
+            this._messageSubscriber.Unsubscribe(this);
+        }
+        #endregion
+
         #region Private Methods 
         private void HandleUnlockWallet()
         {
             this.ConnectionStatus = "Initializing Wallet";
-            this._walletController.Initialize();
+            var initializationParameters = new FullWalletInitializationParameters(20333, 10333, "ChainPrivateNet", "Certs");        // TODO [AboimPinto]: Need to get this values from the Settings
+            this._walletController.Initialize(initializationParameters);
 
             this.ConnectionStatus = "Load NEP5 Script Hashes";
             this._walletController.SetNEP5WatchScriptHashes(new string[] { });
@@ -123,12 +133,6 @@ namespace Neo.Gui.ViewModels
             this.ConnectionStatus = "Save settings";
             this._settingsManager.LastWalletPath = this.WalletPath;
             this._settingsManager.Save();
-
-            this.ConnectionStatus = "Connecting to NEO Private Network Node...";
-            //if (this._walletController.WalletIsOpen)
-            //{
-            //    this._messagePublisher.Publish(new NavigationMessage("DashboardView"));
-            //}
         }
         #endregion
     }
