@@ -71,6 +71,7 @@
             <TextBox 
                 Grid.Column="2" 
                 Grid.Row="0"
+                Text="{Binding WalletPath, Mode=TwoWay}"
                 VerticalAlignment="Center" 
                 Foreground="White"
                 FontSize="30" />
@@ -114,15 +115,18 @@
                         BlurRadius="4"/>
                 </TextBlock.Effect>
             </TextBlock>
+
             <PasswordBox 
                 Grid.Column="2" 
                 Grid.Row="0"
+                markupExtensions:PasswordHelper.Attach="True"
+                markupExtensions:PasswordHelper.Password="{Binding WalletPassword, Mode=OneWayToSource}"
                 VerticalAlignment="Center" 
                 Foreground="White"
                 FontSize="30" />
         </Grid>
 
-        <Grid 
+        <!--<Grid 
             Grid.Row="3" 
             Margin="100 0 100 20">
 
@@ -155,6 +159,28 @@
                 SelectedItem="{Binding SelectedNetwork, Mode=TwoWay}"
                 Foreground="White"
                 FontSize="30" />
+        </Grid>-->
+
+        <Grid 
+            Grid.Row="3" 
+            Margin="100 0 100 20">
+
+            <TextBlock 
+                Text="{Binding ConnectionStatus}" 
+                Foreground="Black" 
+                VerticalAlignment="Center" 
+                HorizontalAlignment="Center"
+                FontSize="30">
+
+                <TextBlock.Effect>
+                    <DropShadowEffect
+                        ShadowDepth="4"
+                        Direction="330"
+                        Color="White"
+                        Opacity="0.5"
+                        BlurRadius="4"/>
+                </TextBlock.Effect>
+            </TextBlock>
         </Grid>
 
         <Grid 

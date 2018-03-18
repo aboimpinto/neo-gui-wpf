@@ -5,7 +5,10 @@
     xmlns:globalization="clr-namespace:Neo.UI.Core.Globalization.Resources;assembly=Neo.UI.Core.Globalization"
     xmlns:markupExtensions="clr-namespace:Neo.Gui.Wpf.MarkupExtensions"
     xmlns:viewModels="clr-namespace:Neo.Gui.ViewModels;assembly=Neo.Gui.ViewModels"
-    DataContext="{markupExtensions:DataContextBinding ViewModel=viewModels:MainViewModel}">
+    DataContext="{markupExtensions:DataContextBinding ViewModel=viewModels:MainViewModel}"
+    ResizeMode="NoResize"
+    Width="1024"
+    Height="920">
 
     <Grid>
         <Grid.ColumnDefinitions>

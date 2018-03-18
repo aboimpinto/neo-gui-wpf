@@ -327,6 +327,7 @@
     </Compile>
     <Compile Include="Converters\ColorToSolidColorBrushConverter.cs" />
     <Compile Include="Extensions\CollectionExtensions.cs" />
+    <Compile Include="MarkupExtensions\PasswordHelper.cs" />
     <Compile Include="Native\Services\ClipboardManager.cs" />
     <Compile Include="Native\Services\SettingsManager.cs" />
     <Compile Include="Native\Services\CertificateRequestService.cs" />
