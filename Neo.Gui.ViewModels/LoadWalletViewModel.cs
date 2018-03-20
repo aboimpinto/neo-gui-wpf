@@ -103,10 +103,9 @@ namespace Neo.Gui.ViewModels
         {
             this.ConnectionStatus = "Connected to NEO Network";
 
-            if (this._walletController.WalletIsOpen)
-            {
-                this._messagePublisher.Publish(new NavigationMessage("DashboardView"));
-            }
+            if (!this._walletController.WalletIsOpen) return;
+
+            this._messagePublisher.Publish(new InitializeWalletMessage());
         }
         #endregion
 

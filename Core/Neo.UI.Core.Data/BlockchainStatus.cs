@@ -4,8 +4,13 @@ namespace Neo.UI.Core.Data
 {
     public class BlockchainStatus
     {
-        public BlockchainStatus(uint height, uint headerHeight, bool nextBlockProgressIsIndeterminate,
-            double nextBlockProgressFraction, TimeSpan timeSinceLastBlock, int nodeCount)
+        public BlockchainStatus(
+            uint height, 
+            uint headerHeight, 
+            bool nextBlockProgressIsIndeterminate,
+            double nextBlockProgressFraction, 
+            TimeSpan timeSinceLastBlock, 
+            int nodeCount)
         {
             this.Height = height;
             this.HeaderHeight = headerHeight;
