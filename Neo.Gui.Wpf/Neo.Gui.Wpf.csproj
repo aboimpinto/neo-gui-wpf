@@ -363,6 +363,7 @@
     </Compile>
     <Compile Include="Converters\ColorToSolidColorBrushConverter.cs" />
     <Compile Include="Extensions\CollectionExtensions.cs" />
+    <Compile Include="MarkupExtensions\FocusHelper.cs" />
     <Compile Include="MarkupExtensions\PasswordHelper.cs" />
     <Compile Include="MarkupExtensions\VisibleIfExtension.cs" />
     <Compile Include="Native\Services\ClipboardManager.cs" />

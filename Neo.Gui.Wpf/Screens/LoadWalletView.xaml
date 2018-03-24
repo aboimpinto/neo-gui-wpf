@@ -7,7 +7,7 @@
     DataContext="{markupExtensions:DataContextBinding ViewModel=viewModels:LoadWalletViewModel}"
     Tag="LoadWalletView">
 
-    <Grid Background="#FF9EAF99">
+    <Grid Background="#333DA43C">
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="Auto" />
@@ -20,7 +20,7 @@
         <TextBlock 
             Grid.Row="0"
             FontSize="70"
-            Foreground="White"
+            Foreground="Black"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Text="NEO-GUI Wallet">
@@ -29,7 +29,7 @@
                 <DropShadowEffect
                     ShadowDepth="4"
                     Direction="330"
-                    Color="Black"
+                    Color="White"
                     Opacity="0.5"
                     BlurRadius="4"/>
             </TextBlock.Effect>
@@ -55,7 +55,7 @@
                 Grid.Column="0" 
                 Grid.Row="0"
                 Text="Wallet path" 
-                Foreground="White" 
+                Foreground="Black" 
                 VerticalAlignment="Center" 
                 FontSize="30">
 
@@ -63,7 +63,7 @@
                     <DropShadowEffect
                         ShadowDepth="4"
                         Direction="330"
-                        Color="Black"
+                        Color="White"
                         Opacity="0.5"
                         BlurRadius="4"/>
                 </TextBlock.Effect>
@@ -73,7 +73,7 @@
                 Grid.Row="0"
                 Text="{Binding WalletPath, Mode=TwoWay}"
                 VerticalAlignment="Center" 
-                Foreground="White"
+                Foreground="Black"
                 FontSize="30" />
 
             <Button 
@@ -102,7 +102,7 @@
                 Grid.Column="0" 
                 Grid.Row="0"
                 Text="Wallet password" 
-                Foreground="White" 
+                Foreground="Black" 
                 VerticalAlignment="Center" 
                 FontSize="30">
 
@@ -110,7 +110,7 @@
                     <DropShadowEffect
                         ShadowDepth="4"
                         Direction="330"
-                        Color="Black"
+                        Color="White"
                         Opacity="0.5"
                         BlurRadius="4"/>
                 </TextBlock.Effect>
@@ -121,6 +121,7 @@
                 Grid.Row="0"
                 markupExtensions:PasswordHelper.Attach="True"
                 markupExtensions:PasswordHelper.Password="{Binding WalletPassword, Mode=OneWayToSource}"
+                markupExtensions:FocusHelper.IsFocused="{Binding IsPasswordFocus}"
                 VerticalAlignment="Center" 
                 Foreground="White"
                 FontSize="30" />
@@ -198,7 +199,8 @@
                 HorizontalAlignment="Left"
                 Content="UNLOCK WALLET" 
                 Command="{Binding UnlockWalletCommand}"
-                Background="#333DA43C"/>
+                Background="#333DA43C" 
+                IsDefault="True" />
         </Grid>
     </Grid>
 </UserControl>

@@ -24,6 +24,7 @@ namespace Neo.Gui.ViewModels
         private string _walletPath;
         private string _walletPassword;
         private string _connectionStatus;
+        private bool _isPasswordFocus;
 
         #endregion
 
@@ -45,6 +46,16 @@ namespace Neo.Gui.ViewModels
             set
             {
                 this._walletPassword = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public bool IsPasswordFocus
+        {
+            get => this._isPasswordFocus;
+            set
+            {
+                this._isPasswordFocus = value;
                 this.RaisePropertyChanged();
             }
         }
@@ -92,6 +103,7 @@ namespace Neo.Gui.ViewModels
             if (this._fileManager.FileExists(lastWalletPath))
             {
                 this.WalletPath = lastWalletPath;
+                this.IsPasswordFocus = true;
             }
 
             this.ConnectionStatus = string.Empty;
