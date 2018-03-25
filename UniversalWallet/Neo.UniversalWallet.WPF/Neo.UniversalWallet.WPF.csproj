@@ -167,23 +167,5 @@
   <ItemGroup>
     <Resource Include="Resources\QRCode.png" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Neo.UniversalWallet.Data\Neo.UniversalWallet.Data.csproj">
-      <Project>{D9ED1AD7-68A6-4857-8DB0-60229ECE927B}</Project>
-      <Name>Neo.UniversalWallet.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Neo.UniversalWallet.Model\Neo.UniversalWallet.Model.csproj">
-      <Project>{7ec1a519-d79d-4358-9301-82377e2806f9}</Project>
-      <Name>Neo.UniversalWallet.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Neo.UniversalWallet.ViewModels.Helpers\Neo.UniversalWallet.ViewModels.Helpers.csproj">
-      <Project>{36638ae2-c551-4e2e-8ba5-001bf7eab32e}</Project>
-      <Name>Neo.UniversalWallet.ViewModels.Helpers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Neo.UniversalWallet.ViewModels\Neo.UniversalWallet.ViewModels.csproj">
-      <Project>{d3578925-5768-43f6-94e0-d68d876adeb1}</Project>
-      <Name>Neo.UniversalWallet.ViewModels</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

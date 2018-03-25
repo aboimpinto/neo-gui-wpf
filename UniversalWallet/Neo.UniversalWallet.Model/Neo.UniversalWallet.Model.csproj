@@ -9,8 +9,4 @@
     <PackageReference Include="NeoModules.JsonRpc.Client" Version="1.0.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Neo.UniversalWallet.Data\Neo.UniversalWallet.Data.csproj" />
-  </ItemGroup>
-
 </Project>

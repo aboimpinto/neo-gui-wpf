@@ -11,8 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Neo.UniversalWallet.Data\Neo.UniversalWallet.Data.csproj" />
-    <ProjectReference Include="..\Neo.UniversalWallet.Model\Neo.UniversalWallet.Model.csproj" />
     <ProjectReference Include="..\Neo.UniversalWallet.ViewModels.Helpers\Neo.UniversalWallet.ViewModels.Helpers.csproj" />
   </ItemGroup>
 
