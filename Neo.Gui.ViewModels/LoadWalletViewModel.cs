@@ -26,6 +26,7 @@ namespace Neo.Gui.ViewModels
         private string _connectionStatus;
         private bool _isPasswordFocus;
 
+        private bool _isInputMode = false;
         #endregion
 
         #region Public Properties
@@ -70,6 +71,16 @@ namespace Neo.Gui.ViewModels
             }
         }
 
+        public bool IsInputMode
+        {
+            get => this._isInputMode;
+            set
+            {
+                this._isInputMode = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
         public RelayCommand UnlockWalletCommand { get; private set; }
         #endregion
 
@@ -107,14 +118,22 @@ namespace Neo.Gui.ViewModels
             }
 
             this.ConnectionStatus = string.Empty;
+            this.IsInputMode = true;
         }
         #endregion
 
         #region IMessageHandler Implementation 
         public void HandleMessage(WalletStatusMessage message)
         {
-            this.ConnectionStatus = "Connected to NEO Network";
+            if (message.BlockchainStatus.NodeCount == 0)
+            {
+                this.ConnectionStatus = "Waiting to connect to a NEO node";
+                this.IsInputMode = false;
 
+                return;
+            }
+
+            this.ConnectionStatus = "Wait for start syncronization.";
             if (!this._walletController.WalletIsOpen) return;
 
             this._messagePublisher.Publish(new InitializeWalletMessage());
@@ -132,7 +151,11 @@ namespace Neo.Gui.ViewModels
         private void HandleUnlockWallet()
         {
             this.ConnectionStatus = "Initializing Wallet";
-            var initializationParameters = new FullWalletInitializationParameters(20333, 10333, "ChainPrivateNet", "Certs");        // TODO [AboimPinto]: Need to get this values from the Settings
+            var initializationParameters = new FullWalletInitializationParameters(
+                this._settingsManager.LocalNodePort, 
+                this._settingsManager.LocalWSPort, 
+                this._settingsManager.BlockchainDataDirectoryPath, 
+                this._settingsManager.CertificateCachePath);
             this._walletController.Initialize(initializationParameters);
 
             this.ConnectionStatus = "Load NEP5 Script Hashes";
@@ -140,6 +163,12 @@ namespace Neo.Gui.ViewModels
 
             this.ConnectionStatus = "Opening the Wallet";
             this._walletController.OpenWallet(this.WalletPath, this.WalletPassword);
+
+            if (!this._walletController.WalletIsOpen)
+            {
+                this._walletController.Dispose();
+                this.IsInputMode = false;
+            }
 
             this.ConnectionStatus = "Save settings";
             this._settingsManager.LastWalletPath = this.WalletPath;

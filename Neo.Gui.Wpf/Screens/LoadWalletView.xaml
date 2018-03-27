@@ -40,7 +40,7 @@
             Margin="100 0 100 20">
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="230" />
                 <ColumnDefinition Width="10" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="100" />
@@ -74,13 +74,15 @@
                 Text="{Binding WalletPath, Mode=TwoWay}"
                 VerticalAlignment="Center" 
                 Foreground="Black"
-                FontSize="30" />
+                FontSize="20" 
+                IsEnabled="False" />
 
             <Button 
                 Grid.Row="0" 
                 Grid.Column="3" 
                 Content="BROWSE" 
-                Background="#333DA43C" />
+                Background="#333DA43C" 
+                IsEnabled="{Binding IsInputMode}" />
         </Grid>
 
         <Grid 
@@ -88,7 +90,7 @@
             Margin="100 0 100 20">
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="230" />
                 <ColumnDefinition Width="10" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
@@ -123,8 +125,9 @@
                 markupExtensions:PasswordHelper.Password="{Binding WalletPassword, Mode=OneWayToSource}"
                 markupExtensions:FocusHelper.IsFocused="{Binding IsPasswordFocus}"
                 VerticalAlignment="Center" 
-                Foreground="White"
-                FontSize="30" />
+                Foreground="Black"
+                FontSize="20" 
+                IsEnabled="{Binding IsInputMode}" />
         </Grid>
 
         <!--<Grid 
@@ -189,18 +192,27 @@
             Margin="100 0 100 20">
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="230" />
                 <ColumnDefinition Width="10" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
             <Button 
-                Grid.Column="2" 
+                Grid.Column="0" 
                 HorizontalAlignment="Left"
+                Content="CREATE WALLET" 
+                Command="{Binding CreateWalletCommand}"
+                Background="#333DA43C" 
+                IsEnabled="{Binding IsInputMode}" />
+
+            <Button 
+                Grid.Column="2" 
+                HorizontalAlignment="Right"
                 Content="UNLOCK WALLET" 
                 Command="{Binding UnlockWalletCommand}"
                 Background="#333DA43C" 
-                IsDefault="True" />
+                IsDefault="True"
+                IsEnabled="{Binding IsInputMode}" />
         </Grid>
     </Grid>
 </UserControl>
