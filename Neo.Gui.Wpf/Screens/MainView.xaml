@@ -8,7 +8,7 @@
     DataContext="{markupExtensions:DataContextBinding ViewModel=viewModels:MainViewModel}"
     ResizeMode="NoResize"
     Width="1024"
-    Height="920">
+    Height="950">
 
     <Grid>
         <Grid.ColumnDefinitions>
