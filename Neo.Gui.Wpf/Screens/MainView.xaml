@@ -45,10 +45,16 @@
             NavigationUIVisibility="Hidden"/>
 
         <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Visibility="{markupExtensions:VisibleIf IsDashboardLoaded}">
-            <TextBlock Text="Last block:" VerticalAlignment="Center" FontWeight="Bold" />
+            <TextBlock Text="Last block:" VerticalAlignment="Center" FontWeight="Bold" Margin="0 0 5 0" />
             <TextBlock Text="{Binding LastBlockSynchronized}" Margin="0 0 5 0" VerticalAlignment="Center" />
+            <TextBlock Margin="0 0 5 0">
+                <Run Text="(" />
+                <Run Text="{Binding SynchronizationPercentage}" />
+                <Run Text="%" />
+                <Run Text=")" />
+            </TextBlock>
             <TextBlock Text="at" Margin="0 0 5 0" VerticalAlignment="Center" FontWeight="Bold" />
-            <TextBlock Text="{Binding LastBlockSynchronizedTimeStamp}" VerticalAlignment="Center" />
+            <TextBlock Text="{Binding LastBlockSynchronizedTimeStamp}" VerticalAlignment="Center" Margin="0 0 5 0" />
         </StackPanel>
     </Grid>
 </Window>

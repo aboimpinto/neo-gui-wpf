@@ -21,6 +21,7 @@ namespace Neo.Gui.ViewModels
         private string _lastBlockSynchronized;
         private string _lastBlockSynchronizedTimeStamp;
         private int _nodeCount;
+        private string _synchronizationPercentage;
 
         #endregion
 
@@ -62,6 +63,16 @@ namespace Neo.Gui.ViewModels
             set
             {
                 this._isDashboardLoaded = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public string SynchronizationPercentage
+        {
+            get => this._synchronizationPercentage;
+            set
+            {
+                this._synchronizationPercentage = value;
                 this.RaisePropertyChanged();
             }
         }
@@ -129,6 +140,8 @@ namespace Neo.Gui.ViewModels
                 this.LastBlockSynchronized = message.BlockchainStatus.Height.ToString();
                 this.LastBlockSynchronizedTimeStamp = DateTime.UtcNow.Subtract(message.BlockchainStatus.TimeSinceLastBlock).ToString("yyy-MM-dd HH:mm:ss");
                 this.NodeCount = message.BlockchainStatus.NodeCount;
+
+                this.SynchronizationPercentage = ((message.BlockchainStatus.Height * 100) / message.BlockchainStatus.HeaderHeight).ToString();
 
                 if (!this._isDashboardLoaded)
                 {
