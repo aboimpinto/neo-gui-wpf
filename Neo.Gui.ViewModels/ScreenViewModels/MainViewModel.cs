@@ -4,7 +4,7 @@ using GalaSoft.MvvmLight;
 using Neo.UI.Core.Messaging.Interfaces;
 using Neo.UI.Core.Wallet.Messages;
 
-namespace Neo.Gui.ViewModels
+namespace Neo.Gui.ViewModels.ScreenViewModels
 {
     public class MainViewModel : 
         ViewModelBase,

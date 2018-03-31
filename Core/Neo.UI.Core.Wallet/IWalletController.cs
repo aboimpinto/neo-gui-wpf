@@ -69,9 +69,11 @@ namespace Neo.UI.Core.Wallet
         /// </summary>
         IEnumerable<string> GetAccountsAddresses();
 
+        IEnumerable<WalletAccountDto> GetAccountsDto();
+
         /// <summary>
-        /// Gets all accounts in wallets.
-        /// </summary>
+            /// Gets all accounts in wallets.
+            /// </summary>
         IEnumerable<WalletAccount> GetAccounts();
 
         /// <summary>

@@ -6,7 +6,7 @@ using Neo.UI.Core.Wallet;
 using Neo.UI.Core.Wallet.Initialization;
 using Neo.UI.Core.Wallet.Messages;
 
-namespace Neo.Gui.ViewModels
+namespace Neo.Gui.ViewModels.ScreenViewModels
 {
     public class LoadWalletViewModel : 
         ViewModelBase, 
@@ -26,7 +26,7 @@ namespace Neo.Gui.ViewModels
         private string _connectionStatus;
         private bool _isPasswordFocus;
 
-        private bool _isInputMode = false;
+        private bool _isInputMode;
         #endregion
 
         #region Public Properties

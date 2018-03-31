@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Windows;
 
 using Autofac;
-using Neo.Gui.ViewModels;
+using Neo.Gui.ViewModels.ScreenViewModels;
 using Neo.Gui.Wpf.MarkupExtensions;
 using Neo.Gui.Wpf.Native;
 using Neo.Gui.Wpf.Properties;

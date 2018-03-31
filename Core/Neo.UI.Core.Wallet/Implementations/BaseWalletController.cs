@@ -23,6 +23,7 @@ using Neo.UI.Core.Transactions.Interfaces;
 using Neo.UI.Core.Transactions.Parameters;
 using Neo.UI.Core.Wallet.Data;
 using Neo.UI.Core.Wallet.Exceptions;
+using Neo.UI.Core.Wallet.ExtensionMethods;
 using Neo.UI.Core.Wallet.Helpers;
 using Neo.UI.Core.Wallet.Initialization;
 using Neo.UI.Core.Wallet.Messages;
@@ -293,6 +294,16 @@ namespace Neo.UI.Core.Wallet.Implementations
             var scriptHash = UInt160.Parse(scriptHashStr);
 
             return this.currentWallet.Contains(scriptHash);
+        }
+
+        public IEnumerable<WalletAccountDto> GetAccountsDto()
+        {
+            this.ThrowIfWalletIsNotOpen();
+
+            var accountsDto = this.currentWallet
+                .GetAccounts()
+                .Select(x => x.ToWalletAccountDto());
+            return accountsDto;
         }
 
         public IEnumerable<WalletAccount> GetAccounts()

@@ -4,10 +4,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:globalization="clr-namespace:Neo.UI.Core.Globalization.Resources;assembly=Neo.UI.Core.Globalization"
     xmlns:markupExtensions="clr-namespace:Neo.Gui.Wpf.MarkupExtensions"
-    xmlns:viewModels="clr-namespace:Neo.Gui.ViewModels;assembly=Neo.Gui.ViewModels"
-    DataContext="{markupExtensions:DataContextBinding ViewModel=viewModels:MainViewModel}"
+    xmlns:screenViewModels="clr-namespace:Neo.Gui.ViewModels.ScreenViewModels;assembly=Neo.Gui.ViewModels"
+    DataContext="{markupExtensions:DataContextBinding ViewModel=screenViewModels:MainViewModel}"
     ResizeMode="NoResize"
-    Width="1024"
+    Width="1250"
     Height="950">
 
     <Grid>
