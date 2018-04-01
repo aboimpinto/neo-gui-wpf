@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
@@ -18,6 +19,7 @@ using Neo.UI.Core.Services.Interfaces;
 using Neo.UI.Core.Transactions.Interfaces;
 using Neo.UI.Core.Transactions.Parameters;
 using Neo.UI.Core.Wallet.Data;
+using Neo.UI.Core.Wallet.ExtensionMethods;
 using Neo.UI.Core.Wallet.Initialization;
 using Neo.UI.Core.Wallet.Messages;
 using Neo.VM;
@@ -341,6 +343,28 @@ namespace Neo.UI.Core.Wallet.Implementations
             this.checkNep5Balance = true;
 
             return true;
+        }
+
+        public IReadOnlyCollection<AssetBalanceDto> GetAccountAssetBalanced(WalletAccountDto account)
+        {
+            var assetBalances = new List<AssetBalanceDto>();
+
+            var coins = this.currentWallet
+                .RetrieveUnspendCoins();
+
+            // Retrieve Governing Token balance
+            var governingTokenBalance = coins.CalculateTokenBalance(account, GoverningTokenAssetId);
+            assetBalances.Add(new AssetBalanceDto(GoverningTokenAssetId, "NEO", governingTokenBalance, AssetTypeDto.GoverningToken));
+
+            // Retrieve Utility Token balance
+            var utilityTokenBalance = coins.CalculateTokenBalance(account, UtilityTokenAssetId);
+            assetBalances.Add(new AssetBalanceDto(UtilityTokenAssetId, "GAS", utilityTokenBalance, AssetTypeDto.UtilityToken));
+
+            // Retrieve Tokens balance
+
+            // Retrieve NEP-5 Tokens balance
+
+            return new ReadOnlyCollection<AssetBalanceDto>(assetBalances);
         }
         #endregion
 

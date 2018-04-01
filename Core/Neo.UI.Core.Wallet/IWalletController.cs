@@ -144,5 +144,7 @@ namespace Neo.UI.Core.Wallet
         IEnumerable<string> GetPublicKeysFromStandardAccounts();
 
         IEnumerable<string> GetAddressesForNonWatchOnlyAccounts();
+
+        IReadOnlyCollection<AssetBalanceDto> GetAccountAssetBalanced(WalletAccountDto account);
     }
 }

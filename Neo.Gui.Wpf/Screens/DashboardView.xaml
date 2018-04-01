@@ -7,7 +7,8 @@
     xmlns:screenViewModels="clr-namespace:Neo.Gui.ViewModels.ScreenViewModels;assembly=Neo.Gui.ViewModels"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     DataContext="{markupExtensions:DataContextBinding ViewModel=screenViewModels:DashboardViewModel}"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:controls="clr-namespace:Neo.Gui.Wpf.Controls"
     mc:Ignorable="d" 
     Tag="DashboardView">
 
@@ -196,125 +197,9 @@
 
                 <!-- NEO & GAS area -->
                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
-                    <materialDesign:Card Padding="16" Margin="8" Background="#333DA43C">
-                        <StackPanel Orientation="Vertical">
-                            <Button Command="{Binding AssetSelectionCommand}" CommandParameter="NEO">
-                                <Button.Template>
-                                    <ControlTemplate>
-                                        <TextBlock 
-                                            Text="NEO"
-                                            HorizontalAlignment="Center"
-                                            Foreground="White"
-                                            FontSize="30"
-                                            Margin="10 0 10 0">
+                    <controls:NeoTokenBox  DataContext="{Binding NeoTokenDetails}" />
 
-                                            <TextBlock.Effect>
-                                                <DropShadowEffect
-                                                    ShadowDepth="4"
-                                                    Direction="330"
-                                                    Color="Black"
-                                                    Opacity="0.5"
-                                                    BlurRadius="4"/>
-                                            </TextBlock.Effect>
-                                        </TextBlock>
-                                    </ControlTemplate>
-                                </Button.Template>
-                            </Button>
-
-                            <Rectangle Height="5" Fill="#FF9EAF99" Margin="0 10 0 10 " />
-
-                            <TextBlock 
-                                Text="1.000"
-                                HorizontalAlignment="Center"
-                                Foreground="White"
-                                FontSize="30"
-                                Margin="10 0 10 10">
-
-                                <TextBlock.Effect>
-                                    <DropShadowEffect
-                                    ShadowDepth="4"
-                                    Direction="330"
-                                    Color="Black"
-                                    Opacity="0.5"
-                                    BlurRadius="4"/>
-                                </TextBlock.Effect>
-                            </TextBlock>
-
-                            <TextBlock 
-                                Text="($9.999.999)"
-                                HorizontalAlignment="Center"
-                                Foreground="White"
-                                FontSize="20" 
-                                Margin="10 0 10 0">
-
-                                <TextBlock.Effect>
-                                    <DropShadowEffect
-                                    ShadowDepth="4"
-                                    Direction="330"
-                                    Color="Black"
-                                    Opacity="0.5"
-                                    BlurRadius="4"/>
-                                </TextBlock.Effect>
-                            </TextBlock>
-                        </StackPanel>
-                    </materialDesign:Card>
-
-                    <materialDesign:Card Padding="16" Margin="8" Background="#333DA43C">
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock 
-                            Text="GAS"
-                            HorizontalAlignment="Center"
-                            Foreground="White"
-                            FontSize="30"
-                            Margin="10 0 10 0">
-
-                                <TextBlock.Effect>
-                                    <DropShadowEffect
-                                ShadowDepth="4"
-                                Direction="330"
-                                Color="Black"
-                                Opacity="0.5"
-                                BlurRadius="4"/>
-                                </TextBlock.Effect>
-                            </TextBlock>
-
-                            <Rectangle Height="5" Fill="#FF9EAF99" Margin="0 10 0 10 " />
-
-                            <TextBlock 
-                            Text="1.000"
-                            HorizontalAlignment="Center"
-                            Foreground="White"
-                            FontSize="30"
-                            Margin="10 0 10 10">
-
-                                <TextBlock.Effect>
-                                    <DropShadowEffect
-                                ShadowDepth="4"
-                                Direction="330"
-                                Color="Black"
-                                Opacity="0.5"
-                                BlurRadius="4"/>
-                                </TextBlock.Effect>
-                            </TextBlock>
-
-                            <TextBlock 
-                                Text="($9.999.999)"
-                                HorizontalAlignment="Center"
-                                Foreground="White"
-                                FontSize="20" 
-                                Margin="10 0 10 0">
-
-                                <TextBlock.Effect>
-                                    <DropShadowEffect
-                                        ShadowDepth="4"
-                                        Direction="330"
-                                        Color="Black"
-                                        Opacity="0.5"
-                                        BlurRadius="4"/>
-                                </TextBlock.Effect>
-                            </TextBlock>
-                        </StackPanel>
-                    </materialDesign:Card>
+                    <controls:GasTokenBox DataContext="{Binding GasTokenDetails}" />
                 </StackPanel>
 
                 <!-- Tokens area -->

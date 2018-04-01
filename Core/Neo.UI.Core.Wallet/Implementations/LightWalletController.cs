@@ -179,6 +179,11 @@ namespace Neo.UI.Core.Wallet.Implementations
             }
         }
 
+        public IReadOnlyCollection<AssetBalanceDto> GetAccountAssetBalanced(WalletAccountDto account)
+        {
+            throw new NotImplementedException("Not implemented in LightWallet implementation");
+        }
+
         private async Task UpdateWalletBalances()
         {
             var accountService = new NeoApiAccountService(this.rpcClient);

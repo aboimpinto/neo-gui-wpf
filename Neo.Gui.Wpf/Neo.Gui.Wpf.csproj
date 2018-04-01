@@ -361,6 +361,14 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\GasTokenBox.xaml.cs">
+      <DependentUpon>GasTokenBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NeoTokenBox.xaml.cs">
+      <DependentUpon>NeoTokenBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\GasAmountFormatterConverter.cs" />
+    <Compile Include="Converters\NeoAmountFormatterConverter.cs" />
     <Compile Include="Converters\ColorToSolidColorBrushConverter.cs" />
     <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="MarkupExtensions\FocusHelper.cs" />
@@ -624,6 +632,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\GasTokenBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\NeoTokenBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ResourceDictionaries\StyleResources.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
