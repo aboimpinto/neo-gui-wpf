@@ -1,6 +1,7 @@
 ﻿using System;
 using Autofac;
 using GalaSoft.MvvmLight;
+using Neo.Gui.ViewModels.Messages;
 using Neo.UI.Core.Messaging.Interfaces;
 using Neo.UI.Core.Wallet.Messages;
 
@@ -14,6 +15,8 @@ namespace Neo.Gui.ViewModels.ScreenViewModels
     {
         #region Private Fields 
         private static ILifetimeScope _containerLifetimeScope;
+
+        private readonly IMessagePublisher _messagePublisher;
 
         private object _pageContent;
         private bool _isWalletInitialized;
@@ -89,8 +92,12 @@ namespace Neo.Gui.ViewModels.ScreenViewModels
         #endregion
 
         #region Constructor 
-        public MainViewModel(IMessageSubscriber messageSubscriber)
+        public MainViewModel(
+            IMessageSubscriber messageSubscriber,
+            IMessagePublisher messagePublisher)
         {
+            this._messagePublisher = messagePublisher;
+
             messageSubscriber.Subscribe(this);
             this.PageContent = LoadView("LoadWalletView");
         }
@@ -137,17 +144,25 @@ namespace Neo.Gui.ViewModels.ScreenViewModels
                     return;
                 }
 
+                if (!this._isDashboardLoaded)
+                {
+                    this.PageContent = LoadView("DashboardView");
+                    this.IsDashboardLoaded = true;
+                }
+
+                if (this.LastBlockSynchronized == message.BlockchainStatus.Height.ToString())
+                {
+                    return;
+                }
+
+                // This code only runs once per block.
                 this.LastBlockSynchronized = message.BlockchainStatus.Height.ToString();
                 this.LastBlockSynchronizedTimeStamp = DateTime.UtcNow.Subtract(message.BlockchainStatus.TimeSinceLastBlock).ToString("yyy-MM-dd HH:mm:ss");
                 this.NodeCount = message.BlockchainStatus.NodeCount;
 
                 this.SynchronizationPercentage = ((message.BlockchainStatus.Height * 100) / message.BlockchainStatus.HeaderHeight).ToString();
 
-                if (!this._isDashboardLoaded)
-                {
-                    this.PageContent = LoadView("DashboardView");
-                    this.IsDashboardLoaded = true;
-                }
+                this._messagePublisher.Publish(new NewBlockReceivedMessage());
             }
         }
         #endregion
