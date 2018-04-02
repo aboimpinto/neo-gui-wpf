@@ -75,7 +75,6 @@ namespace Neo.UI.Core.Wallet.Implementations
         #endregion
 
         #region IWalletController implementation
-
         public bool LightMode => false;
 
         public void Initialize(IWalletInitializationParameters parameters)

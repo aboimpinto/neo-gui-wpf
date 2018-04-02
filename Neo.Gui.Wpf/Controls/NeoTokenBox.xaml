@@ -12,11 +12,11 @@
     <Grid>
         <materialDesign:Card Padding="16" Margin="8" Background="#333DA43C">
             <StackPanel Orientation="Vertical">
-                <Button Command="{Binding AssetSelectionCommand}" CommandParameter="NEO">
+                <Button Command="{Binding AssetSelectionCommand}">
                     <Button.Template>
                         <ControlTemplate>
                             <TextBlock 
-                                Text="{Binding Name, FallbackValue=XXX}"
+                                Text="{Binding AssetDetails.Name, FallbackValue=XXX}"
                                 HorizontalAlignment="Center"
                                 Foreground="White"
                                 FontSize="30"
@@ -39,7 +39,7 @@
                 <Rectangle Height="5" Fill="Green" Margin="0 10 0 10 " />
 
                 <TextBlock 
-                    Text="{Binding Balance, FallbackValue=100.000.000, Converter={StaticResource NeoAmountFormatterConverter}}"
+                    Text="{Binding AssetDetails.Balance, FallbackValue=100.000.000, Converter={StaticResource NeoAmountFormatterConverter}}"
                     HorizontalAlignment="Center"
                     Foreground="White"
                     FontSize="20"

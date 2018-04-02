@@ -197,9 +197,9 @@
 
                 <!-- NEO & GAS area -->
                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
-                    <controls:NeoTokenBox  DataContext="{Binding NeoTokenDetails}" />
+                    <controls:NeoTokenBox  DataContext="{Binding NeoTokenDetailsViewModel}" />
 
-                    <controls:GasTokenBox DataContext="{Binding GasTokenDetails}" />
+                    <controls:GasTokenBox DataContext="{Binding GasTokenDetailsViewModel}" />
                 </StackPanel>
 
                 <!-- Tokens area -->
