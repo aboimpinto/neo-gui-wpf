@@ -365,6 +365,13 @@ namespace Neo.UI.Core.Wallet.Implementations
 
             return new ReadOnlyCollection<AssetBalanceDto>(assetBalances);
         }
+
+        public void ListTransactions()
+        {
+            var transactions = this.currentWallet.GetTransactions();
+
+            var transaction = this.blockchainService.GetTransaction(transactions.First(), out var height);
+        }
         #endregion
 
         #region IDisposable implementation

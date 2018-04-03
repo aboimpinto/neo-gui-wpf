@@ -146,5 +146,7 @@ namespace Neo.UI.Core.Wallet
         IEnumerable<string> GetAddressesForNonWatchOnlyAccounts();
 
         IReadOnlyCollection<AssetBalanceDto> GetAccountAssetBalanced(WalletAccountDto account);
+
+        void ListTransactions();
     }
 }

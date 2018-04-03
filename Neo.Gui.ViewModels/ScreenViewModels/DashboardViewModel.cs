@@ -80,7 +80,7 @@ namespace Neo.Gui.ViewModels.ScreenViewModels
 
         private void RefreshTransactionList()
         {
-
+            this._walletController.ListTransactions();
         }
         #endregion
     }

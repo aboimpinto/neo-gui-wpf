@@ -184,6 +184,11 @@ namespace Neo.UI.Core.Wallet.Implementations
             throw new NotImplementedException("Not implemented in LightWallet implementation");
         }
 
+        public void ListTransactions()
+        {
+            throw new NotImplementedException("Not implemented in LightWallet implementation");
+        }
+
         private async Task UpdateWalletBalances()
         {
             var accountService = new NeoApiAccountService(this.rpcClient);
