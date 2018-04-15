@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Neo.Core;
@@ -86,7 +87,7 @@ namespace Neo.UI.Core.Wallet
         /// </summary>
         IEnumerable<WalletAccount> GetStandardAccounts();
 
-        Task<IEnumerable<AssetDto>> GetWalletAssets();
+        Task<ReadOnlyCollection<AssetDto>> GetWalletAssets();
 
         UInt160 GetChangeAddress();
 
@@ -147,6 +148,8 @@ namespace Neo.UI.Core.Wallet
 
         IReadOnlyCollection<AssetBalanceDto> GetAccountAssetBalanced(WalletAccountDto account);
 
-        void ListTransactions();
+        Task<ReadOnlyCollection<TransactionDto>> ListTransactions(WalletAccountDto account);
+
+        Task<ReadOnlyCollection<TransactionDto>> ListLastTransactions(WalletAccountDto account);
     }
 }

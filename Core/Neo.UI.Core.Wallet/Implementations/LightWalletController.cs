@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
@@ -184,7 +185,12 @@ namespace Neo.UI.Core.Wallet.Implementations
             throw new NotImplementedException("Not implemented in LightWallet implementation");
         }
 
-        public void ListTransactions()
+        public Task<ReadOnlyCollection<TransactionDto>> ListTransactions(WalletAccountDto account)
+        {
+            throw new NotImplementedException("Not implemented in LightWallet implementation");
+        }
+
+        public Task<ReadOnlyCollection<TransactionDto>> ListLastTransactions(WalletAccountDto account)
         {
             throw new NotImplementedException("Not implemented in LightWallet implementation");
         }
@@ -496,7 +502,7 @@ namespace Neo.UI.Core.Wallet.Implementations
             return await transactionService.SendRawTransaction.SendRequestAsync(inventory.ToArray().ToHexString());
         }
 
-        public Task<IEnumerable<AssetDto>> GetWalletAssets()
+        public Task<ReadOnlyCollection<AssetDto>> GetWalletAssets()
         {
             throw new NotImplementedException();
         }

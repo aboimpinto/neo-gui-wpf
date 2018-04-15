@@ -36,6 +36,8 @@ namespace Neo.Gui.ViewModels.ScreenViewModels
         public TokenDetailsViewModel NeoTokenDetailsViewModel { get; }
 
         public TokenDetailsViewModel GasTokenDetailsViewModel { get; }
+
+        public ObservableCollection<TransactionDto> LastTransactions { get; }
         #endregion
 
         #region Constructor 
@@ -46,6 +48,7 @@ namespace Neo.Gui.ViewModels.ScreenViewModels
             messageSubscriber.Subscribe(this);
 
             this.Accounts = new ObservableCollection<WalletAccountDto>();
+            this.LastTransactions = new ObservableCollection<TransactionDto>();
             this.NeoTokenDetailsViewModel = new TokenDetailsViewModel();
             this.GasTokenDetailsViewModel = new TokenDetailsViewModel();
         }
@@ -78,9 +81,16 @@ namespace Neo.Gui.ViewModels.ScreenViewModels
             this.GasTokenDetailsViewModel.AssetDetails = assetsBalance.RetrieveGasToken();
         }
 
-        private void RefreshTransactionList()
+        private async void RefreshTransactionList()
         {
-            this._walletController.ListTransactions();
+            var transactions = await this._walletController.ListLastTransactions(this.AccountSelected);
+
+            this.LastTransactions.Clear();
+
+            foreach (var transaction in transactions)
+            {
+                this.LastTransactions.Add(transaction);
+            }
         }
         #endregion
     }

@@ -148,7 +148,7 @@ namespace Neo.UI.Core.Wallet.Implementations
             return tcs.Task;
         }
 
-        public Task<IEnumerable<AssetDto>> GetWalletAssets()
+        public Task<ReadOnlyCollection<AssetDto>> GetWalletAssets()
         {
             var walletAssets = new List<AssetDto>();
 
@@ -185,8 +185,8 @@ namespace Neo.UI.Core.Wallet.Implementations
                 });
             }
 
-            var tcs = new TaskCompletionSource<IEnumerable<AssetDto>>();
-            tcs.SetResult(walletAssets);
+            var tcs = new TaskCompletionSource<ReadOnlyCollection<AssetDto>>();
+            tcs.SetResult(new ReadOnlyCollection<AssetDto>(walletAssets));
             return tcs.Task;
         }
 
@@ -366,11 +366,48 @@ namespace Neo.UI.Core.Wallet.Implementations
             return new ReadOnlyCollection<AssetBalanceDto>(assetBalances);
         }
 
-        public void ListTransactions()
+        public async Task<ReadOnlyCollection<TransactionDto>> ListTransactions(WalletAccountDto account)
         {
-            var transactions = this.currentWallet.GetTransactions();
+            var transactionDtoList = new List<TransactionDto>();
 
-            var transaction = this.blockchainService.GetTransaction(transactions.First(), out var height);
+            var transactions = this.currentWallet.GetTransactions().ToList();
+
+            var availableAssets = await this.GetWalletAssets();
+            
+            if (transactions.Any())
+            {
+                foreach (var transactionScriptHash in transactions)
+                {
+                    var transaction = this.blockchainService.GetTransaction(transactionScriptHash, out var height);
+                    var transactionTime = this.blockchainService.GetTimeOfBlock((uint) height);
+
+                    var transactionOutputForTheAccount = transaction.Outputs.Single(x => x.ScriptHash == UInt160.Parse(account.ScriptHash));
+
+                    var transactionDto = new TransactionDto
+                    {
+                        Token = availableAssets.Single(x => x.Id == transactionOutputForTheAccount.AssetId.ToString()).Name,
+                        TransactionHash = transactionScriptHash.ToString(),
+                        TransactionTimeStamp = transactionTime,
+                        TransactionType = transaction.Type.ToTransactionTypeEnum(),
+                        Value = transactionOutputForTheAccount.Value.ToString()
+                    };
+                    transactionDtoList.Add(transactionDto);
+                }
+            }
+            
+            return new ReadOnlyCollection<TransactionDto>(transactionDtoList);
+        }
+
+        public async Task<ReadOnlyCollection<TransactionDto>> ListLastTransactions(WalletAccountDto account)
+        {
+            var transactionsDto = await this.ListTransactions(account);
+
+            var lastTransactions = transactionsDto
+                .OrderByDescending(x => x.TransactionTimeStamp)
+                .Take(3)
+                .ToList();
+
+            return new ReadOnlyCollection<TransactionDto>(lastTransactions);
         }
         #endregion
 

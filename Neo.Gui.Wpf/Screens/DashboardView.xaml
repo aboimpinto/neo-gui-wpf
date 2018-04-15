@@ -660,353 +660,131 @@
                     <Rectangle Height="5" Fill="Black" Margin="0 5 0 5 " />
                 </StackPanel>
 
-                <StackPanel Grid.Row="1">
-                    <Grid Margin="0 0 0 5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="150" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="80" />
-                            <ColumnDefinition Width="130" />
-                            <ColumnDefinition Width="170" />
-                        </Grid.ColumnDefinitions>
+                <ItemsControl Grid.Row="1" ItemsSource="{Binding LastTransactions}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
 
-                        <TextBlock 
-                    Grid.Column="0"
-                    Text="99/99/999"
-                    Foreground="Black"
-                    FontSize="20"
-                    Margin="0 0 10 0">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0 0 0 5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="80" />
+                                    <ColumnDefinition Width="130" />
+                                    <ColumnDefinition Width="170" />
+                                </Grid.ColumnDefinitions>
 
-                            <TextBlock.Effect>
-                                <DropShadowEffect
-                        ShadowDepth="4"
-                        Direction="330"
-                        Color="White"
-                        Opacity="0.5"
-                        BlurRadius="4"/>
-                            </TextBlock.Effect>
-                        </TextBlock>
+                                <TextBlock 
+                                    Grid.Column="0"
+                                    Text="{Binding TransactionTimeStamp}"
+                                    Foreground="Black"
+                                    FontSize="20"
+                                    Margin="0 0 10 0">
 
-                        <StackPanel Grid.Column="1" Orientation="Vertical">
-                            <TextBlock 
-                        Text="Contract Transaction"
-                        Foreground="Black"
-                        FontSize="20"
-                        Margin="0 0 10 0">
+                                    <TextBlock.Effect>
+                                        <DropShadowEffect
+                                            ShadowDepth="4"
+                                            Direction="330"
+                                            Color="White"
+                                            Opacity="0.5"
+                                            BlurRadius="4"/>
+                                    </TextBlock.Effect>
+                                </TextBlock>
 
-                                <TextBlock.Effect>
-                                    <DropShadowEffect
-                                ShadowDepth="4"
-                                Direction="330"
-                                Color="White"
-                                Opacity="0.5"
-                                BlurRadius="4"/>
-                                </TextBlock.Effect>
-                            </TextBlock>
-                            <TextBlock 
-                        Text="90cdb3a941bc43116baf528b4e881507ca3b7965407df06153787d5e7bc6942f"
-                        Foreground="Black"
-                        FontSize="10"
-                        Margin="0 0 10 0">
+                                <StackPanel Grid.Column="1" Orientation="Vertical">
+                                    <TextBlock 
+                                        Text="{Binding TransactionType}"
+                                        Foreground="Black"
+                                        FontSize="20"
+                                        Margin="0 0 10 0">
 
-                                <TextBlock.Effect>
-                                    <DropShadowEffect
-                                ShadowDepth="4"
-                                Direction="330"
-                                Color="White"
-                                Opacity="0.5"
-                                BlurRadius="4"/>
-                                </TextBlock.Effect>
-                            </TextBlock>
-                        </StackPanel>
+                                        <TextBlock.Effect>
+                                            <DropShadowEffect
+                                                ShadowDepth="4"
+                                                Direction="330"
+                                                Color="White"
+                                                Opacity="0.5"
+                                                BlurRadius="4"/>
+                                        </TextBlock.Effect>
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Text="{Binding TransactionHash}"
+                                        Foreground="Black"
+                                        FontSize="10"
+                                        Margin="0 0 10 0">
 
-                        <TextBlock 
-                    Grid.Column="2"
-                    Text="NEO"
-                    Foreground="Black"
-                    FontSize="20"
-                    Margin="0 0 10 0"
-                    HorizontalAlignment="Center">
+                                        <TextBlock.Effect>
+                                            <DropShadowEffect
+                                                ShadowDepth="4"
+                                                Direction="330"
+                                                Color="White"
+                                                Opacity="0.5"
+                                                BlurRadius="4"/>
+                                        </TextBlock.Effect>
+                                    </TextBlock>
+                                </StackPanel>
 
-                            <TextBlock.Effect>
-                                <DropShadowEffect
-                        ShadowDepth="4"
-                        Direction="330"
-                        Color="White"
-                        Opacity="0.5"
-                        BlurRadius="4"/>
-                            </TextBlock.Effect>
-                        </TextBlock>
+                                <TextBlock 
+                                    Grid.Column="2"
+                                    Text="{Binding Token}"
+                                    Foreground="Black"
+                                    FontSize="20"
+                                    Margin="0 0 10 0"
+                                    HorizontalAlignment="Center">
 
-                        <TextBlock 
-                    Grid.Column="3"
-                    Text="10.000"
-                    Foreground="Black"
-                    FontSize="20"
-                    Margin="0 0 10 0"
-                    HorizontalAlignment="Center">
+                                    <TextBlock.Effect>
+                                        <DropShadowEffect
+                                            ShadowDepth="4"
+                                            Direction="330"
+                                            Color="White"
+                                            Opacity="0.5"
+                                            BlurRadius="4"/>
+                                    </TextBlock.Effect>
+                                </TextBlock>
 
-                            <TextBlock.Effect>
-                                <DropShadowEffect
-                        ShadowDepth="4"
-                        Direction="330"
-                        Color="White"
-                        Opacity="0.5"
-                        BlurRadius="4"/>
-                            </TextBlock.Effect>
-                        </TextBlock>
+                                <TextBlock 
+                                    Grid.Column="3"
+                                    Text="{Binding Value}"
+                                    Foreground="Black"
+                                    FontSize="20"
+                                    Margin="0 0 10 0"
+                                    HorizontalAlignment="Center">
 
-                        <TextBlock 
-                    Grid.Column="4"
-                    Text="+10"
-                    Foreground="Black"
-                    FontSize="20"
-                    Margin="0 0 10 0"
-                    HorizontalAlignment="Center">
+                                    <TextBlock.Effect>
+                                        <DropShadowEffect
+                                            ShadowDepth="4"
+                                            Direction="330"
+                                            Color="White"
+                                            Opacity="0.5"
+                                            BlurRadius="4"/>
+                                    </TextBlock.Effect>
+                                </TextBlock>
 
-                            <TextBlock.Effect>
-                                <DropShadowEffect
-                        ShadowDepth="4"
-                        Direction="330"
-                        Color="White"
-                        Opacity="0.5"
-                        BlurRadius="4"/>
-                            </TextBlock.Effect>
-                        </TextBlock>
-                    </Grid>
+                                <TextBlock 
+                                    Grid.Column="4"
+                                    Text="+10"
+                                    Foreground="Black"
+                                    FontSize="20"
+                                    Margin="0 0 10 0"
+                                    HorizontalAlignment="Center">
 
-                    <Grid Margin="0 0 0 5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="150" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="80" />
-                            <ColumnDefinition Width="130" />
-                            <ColumnDefinition Width="170" />
-                        </Grid.ColumnDefinitions>
-
-                        <TextBlock 
-                    Grid.Column="0"
-                    Text="99/99/999"
-                    Foreground="Black"
-                    FontSize="20"
-                    Margin="0 0 10 0">
-
-                            <TextBlock.Effect>
-                                <DropShadowEffect
-                        ShadowDepth="4"
-                        Direction="330"
-                        Color="White"
-                        Opacity="0.5"
-                        BlurRadius="4"/>
-                            </TextBlock.Effect>
-                        </TextBlock>
-
-                        <StackPanel Grid.Column="1" Orientation="Vertical">
-                            <TextBlock 
-                        Text="Claim Transaction"
-                        Foreground="Black"
-                        
-                        FontSize="20"
-                        Margin="0 0 10 0">
-
-                                <TextBlock.Effect>
-                                    <DropShadowEffect
-                                ShadowDepth="4"
-                                Direction="330"
-                                Color="White"
-                                Opacity="0.5"
-                                BlurRadius="4"/>
-                                </TextBlock.Effect>
-                            </TextBlock>
-                            <TextBlock 
-                        Text="90cdb3a941bc43116baf528b4e881507ca3b7965407df06153787d5e7bc6942f"
-                        Foreground="Black"
-                        
-                        FontSize="10"
-                        Margin="0 0 10 0">
-
-                                <TextBlock.Effect>
-                                    <DropShadowEffect
-                                ShadowDepth="4"
-                                Direction="330"
-                                Color="White"
-                                Opacity="0.5"
-                                BlurRadius="4"/>
-                                </TextBlock.Effect>
-                            </TextBlock>
-                        </StackPanel>
-
-                        <TextBlock 
-                    Grid.Column="2"
-                    Text="GAS"
-                    Foreground="Black"
-                    FontSize="20"
-                    Margin="0 0 10 0"
-                    HorizontalAlignment="Center">
-
-                            <TextBlock.Effect>
-                                <DropShadowEffect
-                        ShadowDepth="4"
-                        Direction="330"
-                        Color="White"
-                        Opacity="0.5"
-                        BlurRadius="4"/>
-                            </TextBlock.Effect>
-                        </TextBlock>
-
-                        <TextBlock 
-                    Grid.Column="3"
-                    Text="10.000"
-                    Foreground="Black"
-                    FontSize="20"
-                    Margin="0 0 10 0"
-                    HorizontalAlignment="Center">
-
-                            <TextBlock.Effect>
-                                <DropShadowEffect
-                        ShadowDepth="4"
-                        Direction="330"
-                        Color="White"
-                        Opacity="0.5"
-                        BlurRadius="4"/>
-                            </TextBlock.Effect>
-                        </TextBlock>
-
-                        <TextBlock 
-                    Grid.Column="4"
-                    Text="+10"
-                    Foreground="Black"
-                    FontSize="20"
-                    Margin="0 0 10 0"
-                    HorizontalAlignment="Center">
-
-                            <TextBlock.Effect>
-                                <DropShadowEffect
-                        ShadowDepth="4"
-                        Direction="330"
-                        Color="White"
-                        Opacity="0.5"
-                        BlurRadius="4"/>
-                            </TextBlock.Effect>
-                        </TextBlock>
-                    </Grid>
-
-                    <Grid Margin="0 0 0 5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="150" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="80" />
-                            <ColumnDefinition Width="130" />
-                            <ColumnDefinition Width="170" />
-                        </Grid.ColumnDefinitions>
-
-                        <TextBlock 
-                        Grid.Column="0"
-                        Text="99/99/999"
-                        Foreground="Black"
-                        FontSize="20"
-                        Margin="0 0 10 0">
-
-                            <TextBlock.Effect>
-                                <DropShadowEffect
-                            ShadowDepth="4"
-                            Direction="330"
-                            Color="White"
-                            Opacity="0.5"
-                            BlurRadius="4"/>
-                            </TextBlock.Effect>
-                        </TextBlock>
-
-                        <StackPanel Grid.Column="1" Orientation="Vertical">
-                            <TextBlock 
-                            Text="Contract Transaction"
-                            Foreground="Black"
-                            FontSize="20"
-                            Margin="0 0 10 0">
-
-                                <TextBlock.Effect>
-                                    <DropShadowEffect
-                                    ShadowDepth="4"
-                                    Direction="330"
-                                    Color="White"
-                                    Opacity="0.5"
-                                    BlurRadius="4"/>
-                                </TextBlock.Effect>
-                            </TextBlock>
-                            <TextBlock 
-                            Text="90cdb3a941bc43116baf528b4e881507ca3b7965407df06153787d5e7bc6942f"
-                            Foreground="Black"
-                            FontSize="10"
-                            Margin="0 0 10 0">
-
-                                <TextBlock.Effect>
-                                    <DropShadowEffect
-                                    ShadowDepth="4"
-                                    Direction="330"
-                                    Color="White"
-                                    Opacity="0.5"
-                                    BlurRadius="4"/>
-                                </TextBlock.Effect>
-                            </TextBlock>
-                        </StackPanel>
-
-                        <TextBlock 
-                        Grid.Column="2"
-                        Text="NEO"
-                        Foreground="Black"
-                        FontSize="20"
-                        Margin="0 0 10 0"
-                        HorizontalAlignment="Center">
-
-                            <TextBlock.Effect>
-                                <DropShadowEffect
-                            ShadowDepth="4"
-                            Direction="330"
-                            Color="White"
-                            Opacity="0.5"
-                            BlurRadius="4"/>
-                            </TextBlock.Effect>
-                        </TextBlock>
-
-                        <TextBlock 
-                        Grid.Column="3"
-                        Text="10.000"
-                        Foreground="Black"
-                    
-                        FontSize="20"
-                        Margin="0 0 10 0"
-                        HorizontalAlignment="Center">
-
-                            <TextBlock.Effect>
-                                <DropShadowEffect
-                            ShadowDepth="4"
-                            Direction="330"
-                            Color="White"
-                            Opacity="0.5"
-                            BlurRadius="4"/>
-                            </TextBlock.Effect>
-                        </TextBlock>
-
-                        <TextBlock 
-                        Grid.Column="4"
-                        Text="+10"
-                        Foreground="Black"
-                    
-                        FontSize="20"
-                        Margin="0 0 10 0"
-                        HorizontalAlignment="Center">
-
-                            <TextBlock.Effect>
-                                <DropShadowEffect
-                            ShadowDepth="4"
-                            Direction="330"
-                            Color="White"
-                            Opacity="0.5"
-                            BlurRadius="4"/>
-                            </TextBlock.Effect>
-                        </TextBlock>
-                    </Grid>
-                </StackPanel>
+                                    <TextBlock.Effect>
+                                        <DropShadowEffect
+                                            ShadowDepth="4"
+                                            Direction="330"
+                                            Color="White"
+                                            Opacity="0.5"
+                                            BlurRadius="4"/>
+                                    </TextBlock.Effect>
+                                </TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
 
                 <Button 
                     Grid.Row="2" 
