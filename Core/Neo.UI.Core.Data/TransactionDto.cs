@@ -13,5 +13,7 @@ namespace Neo.UI.Core.Data
         public string Token { get; set; }
 
         public string Value { get; set; }
+
+        public long Confirmations { get; set; }
     }
 }

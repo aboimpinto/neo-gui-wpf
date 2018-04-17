@@ -381,6 +381,9 @@ namespace Neo.UI.Core.Wallet.Implementations
                     var transaction = this.blockchainService.GetTransaction(transactionScriptHash, out var height);
                     var transactionTime = this.blockchainService.GetTimeOfBlock((uint) height);
 
+                    var blockchainStatus = this.blockchainService.GetStatus();
+                    var confirmations = blockchainStatus.Height - height + 1;
+
                     var transactionOutputForTheAccount = transaction.Outputs.Single(x => x.ScriptHash == UInt160.Parse(account.ScriptHash));
 
                     var transactionDto = new TransactionDto
@@ -389,7 +392,8 @@ namespace Neo.UI.Core.Wallet.Implementations
                         TransactionHash = transactionScriptHash.ToString(),
                         TransactionTimeStamp = transactionTime,
                         TransactionType = transaction.Type.ToTransactionTypeEnum(),
-                        Value = transactionOutputForTheAccount.Value.ToString()
+                        Value = transactionOutputForTheAccount.Value.ToString(),
+                        Confirmations =  confirmations
                     };
                     transactionDtoList.Add(transactionDto);
                 }
