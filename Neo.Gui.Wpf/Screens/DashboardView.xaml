@@ -9,8 +9,14 @@
     DataContext="{markupExtensions:DataContextBinding ViewModel=screenViewModels:DashboardViewModel}"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:controls="clr-namespace:Neo.Gui.Wpf.Controls"
+    xmlns:converters="clr-namespace:Neo.Gui.Wpf.Converters"
     mc:Ignorable="d" 
     Tag="DashboardView">
+
+    <UserControl.Resources>
+        <converters:DatetimeToDateConverter x:Key="DatetimeToDateConverter" />
+        <converters:DateTimeToTimeConverter x:Key="DateTimeToTimeConverter" />
+    </UserControl.Resources>
 
     <Grid Background="#333DA43C">
         <Grid.RowDefinitions>
@@ -678,22 +684,38 @@
                                     <ColumnDefinition Width="170" />
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock 
-                                    Grid.Column="0"
-                                    Text="{Binding TransactionTimeStamp}"
-                                    Foreground="Black"
-                                    FontSize="20"
-                                    Margin="0 0 10 0">
+                                <StackPanel Grid.Column="0" Orientation="Vertical">
+                                    <TextBlock 
+                                        Text="{Binding TransactionTimeStamp, Converter={StaticResource DatetimeToDateConverter}}"
+                                        Foreground="Black"
+                                        FontSize="20"
+                                        Margin="0 0 10 0">
 
-                                    <TextBlock.Effect>
-                                        <DropShadowEffect
-                                            ShadowDepth="4"
-                                            Direction="330"
-                                            Color="White"
-                                            Opacity="0.5"
-                                            BlurRadius="4"/>
-                                    </TextBlock.Effect>
-                                </TextBlock>
+                                        <TextBlock.Effect>
+                                            <DropShadowEffect
+                                                ShadowDepth="4"
+                                                Direction="330"
+                                                Color="White"
+                                                Opacity="0.5"
+                                                BlurRadius="4"/>
+                                        </TextBlock.Effect>
+                                    </TextBlock>
+                                    <TextBlock 
+                                        Text="{Binding TransactionTimeStamp, Converter={StaticResource DateTimeToTimeConverter}}"
+                                        Foreground="Black"
+                                        FontSize="10"
+                                        Margin="0 0 10 0">
+
+                                        <TextBlock.Effect>
+                                            <DropShadowEffect
+                                                ShadowDepth="4"
+                                                Direction="330"
+                                                Color="White"
+                                                Opacity="0.5"
+                                                BlurRadius="4"/>
+                                        </TextBlock.Effect>
+                                    </TextBlock>
+                                </StackPanel>
 
                                 <StackPanel Grid.Column="1" Orientation="Vertical">
                                     <TextBlock 

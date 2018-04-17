@@ -367,6 +367,8 @@
     <Compile Include="Controls\NeoTokenBox.xaml.cs">
       <DependentUpon>NeoTokenBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\DatetimeToDateConverter.cs" />
+    <Compile Include="Converters\DateTimeToTimeConverter.cs" />
     <Compile Include="Converters\GasAmountFormatterConverter.cs" />
     <Compile Include="Converters\NeoAmountFormatterConverter.cs" />
     <Compile Include="Converters\ColorToSolidColorBrushConverter.cs" />
