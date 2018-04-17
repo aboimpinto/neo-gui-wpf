@@ -133,7 +133,7 @@ namespace Neo.Gui.ViewModels.ScreenViewModels
                 return;
             }
 
-            this.ConnectionStatus = "Wait for start syncronization.";
+            this.ConnectionStatus = "Wait to start synchronization.";
             if (!this._walletController.WalletIsOpen) return;
 
             this._messagePublisher.Publish(new InitializeWalletMessage());
