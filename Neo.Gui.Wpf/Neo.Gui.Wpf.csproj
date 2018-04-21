@@ -387,6 +387,9 @@
     <Compile Include="Native\NativeServicesRegistrationModule.cs" />
     <Compile Include="Native\Services\NotificationService.cs" />
     <Compile Include="Native\Services\DispatchService.cs" />
+    <Compile Include="Screens\AddAddressToAccountView.xaml.cs">
+      <DependentUpon>AddAddressToAccountView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Screens\DashboardView.xaml.cs">
       <DependentUpon>DashboardView.xaml</DependentUpon>
     </Compile>
@@ -650,6 +653,10 @@
     <Page Include="Resources\IconLibrary.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\AddAddressToAccountView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Screens\DashboardView.xaml">
       <SubType>Designer</SubType>

@@ -379,6 +379,10 @@ namespace Neo.UI.Core.Wallet.Implementations
                 foreach (var transactionScriptHash in transactions)
                 {
                     var transaction = this.blockchainService.GetTransaction(transactionScriptHash, out var height);
+                    if (transaction == null)
+                    {
+                        continue;
+                    }
                     var transactionTime = this.blockchainService.GetTimeOfBlock((uint) height);
 
                     var blockchainStatus = this.blockchainService.GetStatus();

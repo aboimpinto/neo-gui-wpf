@@ -16,6 +16,10 @@ namespace Neo.Gui.Wpf.Views
                 .RegisterType<DashboardView>()
                 .Keyed<IView>("DashboardView");
 
+            builder
+                .RegisterType<AddAddressToAccount>()
+                .Keyed<IView>("AddAddressToAccount");
+
             base.Load(builder);
         }
     }
