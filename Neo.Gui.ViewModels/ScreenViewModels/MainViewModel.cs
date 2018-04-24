@@ -170,6 +170,7 @@ namespace Neo.Gui.ViewModels.ScreenViewModels
         #region Private Methods 
         private static object LoadView(object viewName)
         {
+            // TODO [AboimPinto]: To be able to test, a ILifetimeScope wrapper should be created.
             var viewInstance = _containerLifetimeScope.ResolveKeyed<IView>(viewName);
             return viewInstance;
         }

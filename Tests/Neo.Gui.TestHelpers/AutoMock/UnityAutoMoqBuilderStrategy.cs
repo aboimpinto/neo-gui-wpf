@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Reflection;
 using Moq;
 using Unity.Builder;
@@ -9,23 +10,24 @@ namespace Neo.Gui.TestHelpers.AutoMock
 {
     public class UnityAutoMoqBuilderStrategy : BuilderStrategy
     {
-        private readonly UnityAutoMockContainer autoMockContainer;
-        private readonly MethodInfo createMethod;
-        private readonly MockRepository mockRepository;
-        private readonly Dictionary<Type, object> mocks;
+        private readonly UnityAutoMockContainer _autoMockContainer;
+        private readonly MethodInfo _createMethod;
+        private readonly MockRepository _mockRepository;
+        private readonly Dictionary<Type, object> _mocks;
 
         public UnityAutoMoqBuilderStrategy(
             MockRepository mockRepository,
             UnityAutoMockContainer autoMockContainer)
         {
-            this.mockRepository = mockRepository;
-            this.autoMockContainer = autoMockContainer;
+            this._mockRepository = mockRepository;
+            this._autoMockContainer = autoMockContainer;
 
-            this.createMethod = mockRepository.GetType().GetMethod("Create", new Type[] { });
+            this._createMethod = mockRepository.GetType().GetMethod("Create", new Type[] { });
 
-            this.mocks = new Dictionary<Type, object>();
+            this._mocks = new Dictionary<Type, object>();
         }
 
+        [DebuggerStepThrough]
         public override void PreBuildUp(IBuilderContext context)
         {
             var type = context.OriginalBuildKey.Type;
@@ -39,17 +41,17 @@ namespace Neo.Gui.TestHelpers.AutoMock
 
         private object GetOrCreateMock(Type t)
         {
-            if (this.mocks.ContainsKey(t))
+            if (this._mocks.ContainsKey(t))
             {
-                return this.mocks[t];
+                return this._mocks[t];
             }
 
             var genericType = typeof(Mock<>).MakeGenericType(t);
 
-            var specificCreateMethod = this.createMethod.MakeGenericMethod(t);
-            var mock = (Mock)specificCreateMethod.Invoke(this.mockRepository, null);
+            var specificCreateMethod = this._createMethod.MakeGenericMethod(t);
+            var mock = (Mock)specificCreateMethod.Invoke(this._mockRepository, null);
 
-            var interfaceImplementations = this.autoMockContainer.GetInterfaceImplementations(t);
+            var interfaceImplementations = this._autoMockContainer.GetInterfaceImplementations(t);
             if (interfaceImplementations != null)
             {
                 foreach (var implementation in interfaceImplementations.GetImplementations())
@@ -59,7 +61,7 @@ namespace Neo.Gui.TestHelpers.AutoMock
             }
 
             var mockedInstance = mock.Object;
-            this.mocks.Add(t, mockedInstance);
+            this._mocks.Add(t, mockedInstance);
 
             return mockedInstance;
         }
