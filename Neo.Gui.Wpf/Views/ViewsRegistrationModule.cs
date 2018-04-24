@@ -10,11 +10,11 @@ namespace Neo.Gui.Wpf.Views
         {
             builder
                 .RegisterType<LoadWalletView>()
-                .Keyed<IView>("LoadWalletView");
+                .Keyed<IView>(ViewNames.LoadWalletView);
 
             builder
                 .RegisterType<DashboardView>()
-                .Keyed<IView>("DashboardView");
+                .Keyed<IView>(ViewNames.DashboardView);
 
             builder
                 .RegisterType<ManageAccountsView>()

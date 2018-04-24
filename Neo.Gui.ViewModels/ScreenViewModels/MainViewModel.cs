@@ -99,7 +99,7 @@ namespace Neo.Gui.ViewModels.ScreenViewModels
             this._messagePublisher = messagePublisher;
 
             messageSubscriber.Subscribe(this);
-            this.PageContent = LoadView("LoadWalletView");
+            this.PageContent = LoadView(ViewNames.LoadWalletView);
         }
         #endregion
 
@@ -146,7 +146,7 @@ namespace Neo.Gui.ViewModels.ScreenViewModels
 
                 if (!this._isDashboardLoaded)
                 {
-                    this.PageContent = LoadView("DashboardView");
+                    this.PageContent = LoadView(ViewNames.DashboardView);
                     this.IsDashboardLoaded = true;
                 }
 
@@ -160,7 +160,7 @@ namespace Neo.Gui.ViewModels.ScreenViewModels
                 this.LastBlockSynchronizedTimeStamp = DateTime.UtcNow.Subtract(message.BlockchainStatus.TimeSinceLastBlock).ToString("yyy-MM-dd HH:mm:ss");
                 this.NodeCount = message.BlockchainStatus.NodeCount;
 
-                this.SynchronizationPercentage = ((message.BlockchainStatus.Height * 100) / message.BlockchainStatus.HeaderHeight).ToString();
+                this.SynchronizationPercentage = (message.BlockchainStatus.Height * 100 / message.BlockchainStatus.HeaderHeight).ToString();
 
                 this._messagePublisher.Publish(new NewBlockReceivedMessage());
             }
