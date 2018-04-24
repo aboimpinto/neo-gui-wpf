@@ -2,9 +2,9 @@
 
 namespace Neo.Gui.Wpf.Screens
 {
-    public partial class AddAddressToAccountView : IView
+    public partial class ManageAccountsView : IView
     {
-        public AddAddressToAccountView()
+        public ManageAccountsView()
         {
             InitializeComponent();
         }

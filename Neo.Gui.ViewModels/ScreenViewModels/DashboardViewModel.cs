@@ -16,8 +16,9 @@ namespace Neo.Gui.ViewModels.ScreenViewModels
         ILoadable,
         IMessageHandler<NewBlockReceivedMessage>
     {
-        private const string NewAddressLabel = "_newAddress";
         #region Private Fields 
+        private const string ManageAccountsKey = "_manageAccounts";
+
         private readonly IWalletController _walletController;
         private readonly IMessagePublisher _messagePublisher;
 
@@ -31,9 +32,9 @@ namespace Neo.Gui.ViewModels.ScreenViewModels
             get => this._accountSelected;
             set
             {
-                if (value.Address == NewAddressLabel)
+                if (value.Address == ManageAccountsKey)
                 {
-                    this._messagePublisher.Publish(new NavigationMessage("AddAddressToAccount"));
+                    this._messagePublisher.Publish(new NavigationMessage(ViewNames.ManageAccountsView));
                 }
                 else
                 { 
@@ -74,7 +75,7 @@ namespace Neo.Gui.ViewModels.ScreenViewModels
         public void OnLoad()
         {
             this.Accounts.AddRange(this._walletController.GetAccountsDto());
-            this.Accounts.Add(new WalletAccountDto("New address", "_newAddress", string.Empty, string.Empty, AccountType.NonStandard));
+            this.Accounts.Add(new WalletAccountDto("Manage Accounts", ManageAccountsKey, string.Empty, string.Empty, AccountType.NonStandard));
             this.AccountSelected = this.Accounts.First();          // TODO [AboimPinto]: In case of navigation to this screen and the WalletAccountDto is already selected, this logic is wrong.
 
             this.RefreshTokensBalance();
