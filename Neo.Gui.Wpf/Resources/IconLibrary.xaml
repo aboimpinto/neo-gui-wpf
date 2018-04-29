@@ -157,4 +157,43 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style TargetType="ContentControl" x:Key="BackIcon">
+        <Setter Property="Width" Value="32" />
+        <Setter Property="Height" Value="32" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="#000000" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid>
+                        <Viewbox>
+                            <Grid>
+                                <Grid Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                                    <Rectangle Fill="{TemplateBinding Background}" Visibility="Visible" />
+                                </Grid>
+                                <Path
+                                    Data="M14.69948,7.0050564L17.301562,9.6070963 12.597465,14.31111 24.707598,14.31111 24.707598,17.714151 12.998471,17.714151 17.501517,22.217174 14.69948,25.019197 5.6924126,16.012111z M16.000521,1.9010148C12.39745,1.9010149 8.7944405,3.3030332 5.9924042,6.0050493 0.4883088,11.509087 0.4883088,20.416135 5.9924042,25.920206 11.497476,31.424274 20.403589,31.424274 25.908661,25.920206 31.412695,20.416135 31.412695,11.509087 25.908661,6.0050493 23.206602,3.3030332 19.603531,1.9010149 16.000521,1.9010148z M16.000521,0C20.103537,-1.8870742E-07 24.206616,1.6010248 27.309679,4.7040444 33.614748,10.908101 33.514712,21.116153 27.309679,27.321216 21.104588,33.526279 10.896455,33.526279 4.6913626,27.321216 -1.6137065,21.116153 -1.5136686,10.908101 4.6913626,4.7040444 7.7944281,1.6010248 11.897444,-1.8870742E-07 16.000521,0z" 
+                                    Stretch="Uniform" 
+                                    Fill="{TemplateBinding Foreground}" 
+                                    Width="{TemplateBinding Width}" 
+                                    Height="{TemplateBinding Height}" 
+                                    Margin="0,0,0,0" 
+                                    RenderTransformOrigin="0.5,0.5">
+                                    <Path.RenderTransform>
+                                        <TransformGroup>
+                                            <TransformGroup.Children>
+                                                <RotateTransform Angle="0" />
+                                                <ScaleTransform ScaleX="1" ScaleY="1" />
+                                            </TransformGroup.Children>
+                                        </TransformGroup>
+                                    </Path.RenderTransform>
+                                </Path>
+                            </Grid>
+                        </Viewbox>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>
